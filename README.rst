@@ -7,6 +7,8 @@ Introduction
 ------------
 
 **txshark** is based on `pyshark`_.
+It's basically a fork that uses Twisted spawnProcess instead of
+subprocess.
 
 As pyshark, it uses TShark (Wireshark command-line utility) to analyze
 network traffic by simply parsing the TShark pdml output (XML-based format).
@@ -20,7 +22,7 @@ Wireshark dissectors.
 This package provides a Twisted service to start and stop TShark.
 It allows a Twisted app to decode packets from a live network or a file.
 
-Requirements
+Installation
 ------------
 
 - Tool required:
@@ -31,6 +33,12 @@ Requirements
 
   * Twisted
   * lxml
+
+It has only been tested on MacOS X and linux with Python 2.7.
+
+To install, run::
+
+    $ pip install txshark
 
 Usage
 -----
@@ -49,7 +57,7 @@ override the *packetReceived* method to handle incoming packets::
 
         def packetReceived(self, packet):
             """Override the TsharkService method"""
-            log.msg("Packet received: {}".format(packet)
+            log.msg("Packet received: {}".format(packet))
 
 The interfaces to listen to should be given as a list of
 ``{"name": <name>, "filter": <filter>}``.
